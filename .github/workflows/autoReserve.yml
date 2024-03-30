@@ -4,6 +4,8 @@
 name: imaotai-action
 
 on:
+  # 手动构建
+  workflow_dispatch: 
   push:
     branches: [ "master" ]
     paths:
