@@ -25,7 +25,7 @@ print(r'''
 now = datetime.datetime.now()
 if now.hour < 9 or now.hour >= 10:
     logging.info("当前时间不在预约时间段内，退出程序") 
-    sys.exit(1)
+    sys.exit(0)
 
 #随机等待2-5分钟，避免被检测到每天同一时间进行预约
 time.sleep(random.randint(2, 5) * 60)
@@ -36,7 +36,7 @@ process.get_current_session_id()
 configs = login.config
 if len(configs.sections()) == 0:
     logging.error("配置文件未找到配置")
-    sys.exit(0)
+    sys.exit(1)
 
 aes_key = privateCrypt.get_aes_key()
 
