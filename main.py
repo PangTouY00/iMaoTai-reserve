@@ -1,7 +1,8 @@
 import datetime
 import logging
 import sys
-
+import time
+import random
 import config
 import login
 import process
@@ -21,6 +22,15 @@ print(r'''
     vx：L 3 9 7 1 7 9 4 5 9 加好友注明来意
 **************************************
 ''')
+
+#时间判断，如果当前时间在9:00-10:00时间段内，则执行预约程序，否则退出程序     
+now = datetime.datetime.now()
+if now.hour < 9 or now.hour >= 10:
+    logging.info("当前时间不在预约时间段内，退出程序") 
+    sys.exit(1)
+
+#随机等待2-5分钟，避免被检测到每天同一时间进行预约
+time.sleep(random.randint(2, 5) * 60)
 
 process.get_current_session_id()
 
