@@ -27,8 +27,12 @@ if now.hour < 9 or now.hour >= 10:
     logging.info("当前时间不在预约时间段内，退出程序") 
     sys.exit(0)
 
-#随机等待2-5分钟，避免被检测到每天同一时间进行预约
-time.sleep(random.randint(2, 5) * 60)
+#随机等待1-3分钟，防止被检测到每天同一时间预约
+wait_time = random.randint(1, 3)
+logging.info(f"随机等待{wait_time}分钟")
+for i in range(wait_time, 0, -1):
+    logging.info(f"等待中...{i}分钟")
+    time.sleep(60)
 
 process.get_current_session_id()
 
