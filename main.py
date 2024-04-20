@@ -21,18 +21,19 @@ print(r'''
 **************************************
 ''')
 
-#时间判断，如果当前时间在9:00-10:00时间段内，则执行预约程序，否则退出程序     
+#时间判断，如果当前时间在9:00-10:00时间段内，则执行预约程序，否则判断时间是否在7:00-9:00时间段，如果在，则等待到9点05分再执行预约程序，否则退出程序
 now = datetime.datetime.now()
-if now.hour < 9 or now.hour >= 10:
-    logging.info("当前时间不在预约时间段内，退出程序") 
+if now.hour >= 9 and now.hour < 10:
+    logging.info("当前时间为9:00-10:00，开始执行预约程序")
+elif now.hour >= 7 and now.hour < 9:
+    logging.info("当前时间为7:00-9:00，等待9点05分后开始执行预约程序")
+    #计算等待时间
+    wait_time = datetime.datetime.combine(datetime.date.today(), datetime.time(hour=9, minute=5)) - now
+    logging.info(f"等待时间：{wait_time.seconds}秒")
+    time.sleep(wait_time.seconds)
+else:
+    logging.info("当前时间不在预约时间段内，退出程序")
     sys.exit(0)
-
-#随机等待1-3分钟，防止被检测到每天同一时间预约
-wait_time = random.randint(1, 3)
-logging.info(f"随机等待{wait_time}分钟")
-for i in range(wait_time, 0, -1):
-    logging.info(f"等待中...{i}分钟")
-    time.sleep(60)
 
 process.get_current_session_id()
 
