@@ -35,6 +35,7 @@ else:
     logging.info("当前时间不在预约时间段内，退出程序")
     sys.exit(0)
 
+# 获取当前会话ID的方法
 process.get_current_session_id()
 
 # 校验配置文件是否存在
