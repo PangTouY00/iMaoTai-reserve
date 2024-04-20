@@ -5,7 +5,7 @@ name: imaotai-action
 
 on:
   schedule:
-    - cron: '10 0,1 * * *'
+    - cron: '30 23,0 * * *'
   # 手动构建
   workflow_dispatch: 
 
